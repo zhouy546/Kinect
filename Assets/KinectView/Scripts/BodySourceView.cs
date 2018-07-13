@@ -113,6 +113,7 @@ public class BodySourceView : MonoBehaviour
                     _Npeoples[body.TrackingId] = new NPeople();
 
                 }
+                SetJointValue(body);
 
                 RefreshBodyObject(body, _Bodies[body.TrackingId]);
 
@@ -154,6 +155,21 @@ public class BodySourceView : MonoBehaviour
         return jointObj.position;
     }
 
+
+    private void SetJointValue(Kinect.Body body) {
+        _Npeoples[body.TrackingId].LeftElbowPos = GetHandPosition(body, _Bodies[body.TrackingId], Kinect.JointType.ElbowLeft);
+        Debug.Log(GetHandPosition(body, _Bodies[body.TrackingId], Kinect.JointType.ShoulderLeft));
+        _Npeoples[body.TrackingId].LeftShoulderPos = GetHandPosition(body, _Bodies[body.TrackingId], Kinect.JointType.ShoulderLeft);
+
+        _Npeoples[body.TrackingId].RightElbowPos = GetHandPosition(body, _Bodies[body.TrackingId], Kinect.JointType.ElbowRight);
+
+        _Npeoples[body.TrackingId].RightShoulderPos = GetHandPosition(body, _Bodies[body.TrackingId], Kinect.JointType.ShoulderRight);
+
+        _Npeoples[body.TrackingId].CenterPos = GetHandPosition(body, _Bodies[body.TrackingId], Kinect.JointType.SpineBase);
+
+
+    }
+
     private void RefreshHandData(Kinect.Body body)
     {
 
@@ -164,7 +180,7 @@ public class BodySourceView : MonoBehaviour
 
         _Npeoples[body.TrackingId].CenterPos = GetHandPosition(body, _Bodies[body.TrackingId], Kinect.JointType.SpineBase);
 
-
+        _Npeoples[body.TrackingId].setMinAndMaxVal();
     }
 
     private void RefreshBodyObject(Kinect.Body body, GameObject bodyObject)

@@ -3,6 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class NPeople : MonoBehaviour {
+    public Vector3 LeftElbowPos;
+
+    public Vector3 LeftShoulderPos;
+
+    public Vector3 RightElbowPos;
+
+    public Vector3 RightShoulderPos;
 
     private Vector3 leftHandPos;
     public Vector3 LeftHandPos {
@@ -62,5 +69,34 @@ public class NPeople : MonoBehaviour {
         float outVal = ((value - inputMin) / (inputMax - inputMin) * (outputMax - outputMin) + outputMin);
 
         return outVal;
+    }
+
+
+   public void setMinAndMaxVal() {
+        Vector2 LHandPos = new Vector2(leftHandPos.x, leftHandPos.y);
+        Vector2 LElbowPos = new Vector2(LeftElbowPos.x, LeftElbowPos.y);
+        Vector2 LShoulderPos = new Vector2(LeftShoulderPos.x, LeftShoulderPos.y);
+
+
+        Vector2 RHandPos = new Vector2(rightHandPos.x, rightHandPos.y);
+        Vector2 RElbowPos = new Vector2(RightElbowPos.x, RightElbowPos.y);
+        Vector2 RShoulderPos = new Vector2(RightShoulderPos.x, RightShoulderPos.y);
+
+        float leftX = (LHandPos - LElbowPos).magnitude + (LElbowPos - LShoulderPos).magnitude + Mathf.Abs(LShoulderPos.x-CenterPos.x);
+
+        float rightX = (RHandPos - RElbowPos).magnitude + (RElbowPos - RShoulderPos).magnitude + Mathf.Abs(RShoulderPos.x - CenterPos.x);
+
+      //  Debug.Log(LShoulderPos.x);
+
+        xMinValue = CenterPos.x - leftX;
+
+        xMaxValue = CenterPos.x + rightX;
+
+ //       Debug.Log(RightShoulderPos.x);
+
+        //Debug.Log("Min VALUE:" +xMinValue);
+
+        //Debug.Log("MAX VALUE:" + xMaxValue);
+
     }
 }

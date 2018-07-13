@@ -157,7 +157,6 @@ MonoBehaviour:
   updateUI: {fileID: 1556218381}
   BoneMaterial: {fileID: 2100000, guid: f2ea145c63353784985576f08398a815, type: 2}
   BodySourceManager: {fileID: 1698423884}
-  trackedIds: 
 --- !u!1 &211477213
 GameObject:
   m_ObjectHideFlags: 0
